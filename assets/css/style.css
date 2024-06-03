@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  color: #444444;
+  color: #ffffff;
 }
 
 a {
@@ -530,6 +530,17 @@ section {
 }
 
 /*--------------------------------------------------------------
+# main
+--------------------------------------------------------------*/
+#main {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/back.png") fixed center center;
+  background-size: cover;
+  padding: 20px 0;
+  opacity: 0.9;
+  
+}
+
+/*--------------------------------------------------------------
 # Cta
 --------------------------------------------------------------*/
 .cta {
@@ -627,7 +638,7 @@ section {
   display: block;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  color: #222222;
+  color: #ffffff;
 }
 
 /*--------------------------------------------------------------
@@ -635,7 +646,9 @@ section {
 --------------------------------------------------------------*/
 .memberships .progress {
   height: 60px;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: none;
   border-radius: 0;
 }
@@ -644,10 +657,49 @@ section {
   padding: 10px 0;
   margin: 0 0 6px 0;
   text-transform: uppercase;
-  display: block;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  color: #222222;
+  color: #fffefe;
+  display: flex;
+  align-items: center;
+}
+
+.memberships .progress .membership::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  background-image: url("path/to/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
+
+.memberships .progress .membership .img-fluid{
+  width: auto;
+  height: auto;
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+.memberships .progress .membership .img-fluid .logo{
+  max-width: 120px;
+  max-height: 120px;
+}
+
+@media (max-width: 768px) {
+  .memberships .progress {
+    flex-direction: column;
+  }
+
+  .memberships .progress .membership {
+    margin: 10px 0;
+  }
+
+  .memberships .progress .membership::before {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -673,7 +725,7 @@ section {
   font-size: 18px;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  color: #1d685f;
+  color: #5ccbbe;
   margin-bottom: 10px;
 }
 
@@ -684,7 +736,7 @@ section {
   display: inline-block;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #34b7a7;
+  color: #5ccbbe;
 }
 
 .resume .resume-item ul {
@@ -711,6 +763,66 @@ section {
   border: 2px solid #34b7a7;
 }
 
+/*--------------------------------------------------------------
+# Education
+--------------------------------------------------------------*/
+.education .education-title {
+  font-size: 26px;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #222222;
+}
+
+.education .education-item {
+  padding: 0 0 20px 20px;
+  margin-top: -2px;
+  border-left: 2px solid #4ecbbc;
+  position: relative;
+}
+
+.education .education-item h4 {
+  line-height: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  color: #5ccbbe;
+  margin-bottom: 10px;
+}
+
+.education .education-item h5 {
+  font-size: 16px;
+  background: #effbf9;
+  padding: 5px 15px;
+  display: inline-block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #4ecbbc;
+}
+
+.education .education-item ul {
+  padding-left: 20px;
+}
+
+.education .education-item ul li {
+  padding-bottom: 10px;
+}
+
+.education .education-item:last-child {
+  padding-bottom: 0;
+}
+
+.education .education-item::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  left: -9px;
+  top: 0;
+  background: #fff;
+  border: 2px solid #4ecbbc;
+}
 
 /*--------------------------------------------------------------
 # Footer
