@@ -172,6 +172,50 @@
   });
 
   /**
+   * Photot section
+   */
+  document.addEventListener('DOMContentLoaded', function() {
+    const photoInput = document.getElementById('photo-input');
+    const uploadButton = document.getElementById('upload-button');
+    const photoGallery = document.getElementById('photo-gallery');
+  
+    // Function to display photos from local storage
+    function loadPhotos() {
+      const photos = JSON.parse(localStorage.getItem('photos')) || [];
+      photos.forEach(photoSrc => {
+        const img = document.createElement('img');
+        img.src = photoSrc;
+        img.classList.add('col-md-4', 'img-fluid', 'mb-3'); // Bootstrap classes for styling
+        photoGallery.appendChild(img);
+      });
+    }
+  
+    // Load photos on page load
+    loadPhotos();
+  
+    uploadButton.addEventListener('click', function() {
+      if (photoInput.files && photoInput.files[0]) {
+        const file = photoInput.files[0];
+        const reader = new FileReader();
+  
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.classList.add('col-md-4', 'img-fluid', 'mb-3'); // Bootstrap classes for styling
+          photoGallery.appendChild(img);
+  
+          // Save the new photo to local storage
+          const photos = JSON.parse(localStorage.getItem('photos')) || [];
+          photos.push(e.target.result);
+          localStorage.setItem('photos', JSON.stringify(photos));
+        };
+  
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+  
+  /**
    * Initiate Pure Counter 
    */
   new PureCounter();
