@@ -20,4 +20,4 @@ I am excited to present a custom web portfolio created for my client, Aruna. Thi
 - PHP: Server-side scripting language for backend development.
 
 ### Video Preview
-[Watch the project demo video](https://github.com/hewageumesha/Portfolio/test.mp4)
+[Watch the project demo video](https://github.com/hewageumesha/Portfolio/blob/main/test.mp4)
