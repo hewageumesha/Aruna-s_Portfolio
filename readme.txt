@@ -1,8 +1,8 @@
-##Project Showcase: Aruna's Professional Web Portfolio!
+### Project Showcase: Aruna's Professional Web Portfolio!
 
 I am excited to present a custom web portfolio created for my client, Aruna. This portfolio is a comprehensive showcase of Aruna's professional journey, skills, and achievements. Built with a combination of PHP, HTML, CSS, and JavaScript, this portfolio is designed to highlight Aruna's expertise and make a strong impression.
 
-###Features
+### Features
 - About: Detailed information about Aruna's background and experience.
 - Projects: Showcase of Aruna's projects, work, and achievements.
 - Education: Overview of Aruna's educational background.
@@ -13,7 +13,7 @@ I am excited to present a custom web portfolio created for my client, Aruna. Thi
 - CSS Styling: Customized appearance of the webpage using CSS.
 - Interactive Elements: JavaScript-powered interactive elements like buttons and animations.
 
-###Technologies Used
+### Technologies Used
 - HTML: Markup language for structuring the webpage.
 - CSS: Styling language for designing the layout and appearance.
 - JavaScript: Programming language for adding interactivity and dynamic elements.
