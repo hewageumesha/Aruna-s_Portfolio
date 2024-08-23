@@ -65,27 +65,140 @@
   
       <!-- ======= Photoss Section ======= -->
       <section id="photos" class="photos">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>Photos</h2>
-          </div>
-  
-          <!-- Photo Gallery -->
-          <div id="photo-gallery" class="row">
-          <!-- Photos will be dynamically added here -->
-          </div>
-
-          <!-- Photo Upload Section -->
-          <div class="photo-upload">
-            <input type="file" id="photo-input" accept="image/*">
-            <button id="upload-button" class="btn btn-primary">Upload Photo</button>
-          </div>
-  
+        <div class="container mt-5" id="login-section">
+          <h2>Login</h2>
+            <form id="login-form">
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" required>
+                </div>
+                  <button type="submit" class="btn btn-primary">Login</button>
+            </form>
         </div>
+
+        <!-- Photos Section -->
+        <div class="container mt-5" id="photo-section" style="display:none;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Photos</h2>
+                <button id="logout-button" class="btn btn-danger">Logout</button>
+            </div>
+
+            <!-- Photo Gallery -->
+            <div id="photo-gallery" class="row">
+                <!-- Photos will be dynamically added here -->
+            </div>
+
+            <!-- Photo Upload Section -->
+            <div class="photo-upload mt-4">
+                <input type="file" id="photo-input" accept="image/*" class="form-control mb-2">
+                <button id="upload-button" class="btn btn-primary">Upload Photo</button>
+            </div>
+        </div>
+
       </section><!-- End Photos Section -->
   
     </main><!-- End #main -->
+
+    <script>
+    // Fixed username and password
+    const fixedUsername = 'arunasampath';
+    const fixedPassword = '12345678';
+
+    // Function to get a cookie by name
+    function getCookie(name) {
+      let cookieArr = document.cookie.split(";");
+      for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if (name === cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]);
+        }
+      }
+      return null;
+    }
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+      let date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      let expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Function to delete a cookie
+    function deleteCookie(name) {
+      document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    // Login form submission
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Check against fixed credentials
+      if (username === fixedUsername && password === fixedPassword) {
+        setCookie('authenticated', 'true', 1); // Set a cookie for 1 day
+        showPhotoSection();
+      } else {
+        alert('Invalid credentials');
+      }
+    });
+
+    // Show the photo section and hide the login section
+    function showPhotoSection() {
+      document.getElementById('login-section').style.display = 'none';
+      document.getElementById('photo-section').style.display = 'block';
+    }
+
+    // Logout button click event
+    document.getElementById('logout-button').addEventListener('click', function () {
+      deleteCookie('authenticated');
+      location.reload(); // Reload the page to show the login section
+    });
+
+    // Check if the user is authenticated
+    const isAuthenticated = getCookie('authenticated');
+    if (isAuthenticated === 'true') {
+      showPhotoSection();
+    }
+
+    // Photo upload logic
+    document.getElementById('upload-button').addEventListener('click', function () {
+      const input = document.getElementById('photo-input');
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const photoContainer = document.createElement('div');
+          photoContainer.classList.add('col-4', 'mb-3', 'position-relative');
+
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.classList.add('img-thumbnail', 'w-100');
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.classList.add('btn', 'btn-danger', 'position-absolute', 'top-0', 'end-0');
+          deleteBtn.innerText = 'Delete';
+
+          deleteBtn.addEventListener('click', function () {
+            photoContainer.remove();
+          });
+
+          photoContainer.appendChild(img);
+          photoContainer.appendChild(deleteBtn);
+          document.getElementById('photo-gallery').appendChild(photoContainer);
+        };
+        reader.readAsDataURL(file);
+        input.value = ''; // Clear the input
+      } else {
+        alert('Please select a photo to upload.');
+      }
+    });
+  </script>
   
     <!-- ======= Footer ======= -->
     <footer id="footer">
