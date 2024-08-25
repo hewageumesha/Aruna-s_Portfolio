@@ -636,9 +636,10 @@ section {
   margin: 0 0 6px 0;
   text-transform: uppercase;
   display: block;
-  font-weight: 600;
+  font-weight: 900;
   font-family: "Poppins", sans-serif;
   color: #ffffff;
+  font-size: medium;
 }
 
 /*--------------------------------------------------------------
@@ -662,6 +663,7 @@ section {
   color: #fffefe;
   display: flex;
   align-items: center;
+  font-size: medium;
 }
 
 .memberships .progress .membership::before {
@@ -858,6 +860,22 @@ section {
 
 .photo-upload button:hover {
   background-color: #0056b3;
+}
+
+/* Logout Button Styling */
+#logout-button {
+  background-color: #dc3545; /* Red color for logout */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#logout-button:hover {
+  background-color: #c82333; /* Darker red on hover */
 }
 
 #photo-gallery img {
