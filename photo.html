@@ -1,36 +1,38 @@
+<?php
+session_start();
+$isAuthenticated = isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Aruna Bootstrap Template - Photo</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
-  <!-- Vendor CSS Files -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <title>Aruna Bootstrap Template - Photo</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+  
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+  
+    
+    <!-- Vendor CSS Files -->
   <style>
     #upload-section { display: none; }
     .photo-container { position: relative; }
@@ -64,231 +66,88 @@
           <li><a href="skill.html">Skills</a></li>
           <li><a href="membership.html">Memberships</a></li>
           <li><a class="active" href="photo.html">Photos</a></li>
+          <li><a href="login.html">Login</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
-      </nav>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      <div class="header-social-links">
+        <a href="mailto:ehos.sampath@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="assets/cv/CV.pdf" download="Your Name - CV.pdf" class="cv"><i class="bi bi-file-earmark-person"></i></a>
+        <a href="https://www.linkedin.com/in/aruna-sampath" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.facebook.com/ehosaruna?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook"></i></a>
+      </div>
     </div>
   </header>
 
   <main id="main">
     <section id="photos" class="photos">
-      <div id="login-section" class="d-none">
-        <div class="section-title">
-          <h2 class="text-white">Login to Add Photos</h2>
-        </div>
-        <form id="login-form" class="p-4">
-          <div class="form-group">
-            <label for="username" class="text-white">Username</label>
-            <input type="text" class="form-control" id="username" required>
-          </div>
-          <div class="form-group mt-2">
-            <label for="password" class="text-white">Password</label>
-            <input type="password" class="form-control" id="password" required>
-          </div>
-          <div class="text-center mt-3">
-             <button type="submit" class="btn btn-primary col-4">Login</button>
-          </div>
-        </form>
+      <div class="section-title">
+        <h2>Photos</h2>
       </div>
-
-      <div id="photo-section" class="">
-        <div class="section-title">
-          <h2 class="text-white">Photos</h2>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <div class="text-white text-center mx-3"></div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <?php if (!$isAuthenticated) : ?>
           <button id="login-button" class="btn btn-primary mx-3" onclick="login()"> 
-            <i class="bi bi-pen mx-1"></i>
-             Edit
-            </button>
-          <button id="logout-button" class="btn btn-danger mx-3 d-none">
-            <i class="bi bi-box-arrow-in-left mx-2"></i>
-            Logout
+            <i class="bi bi-pen mx-1"></i> Edit
           </button>
-        </div>
-        <div id="photo-gallery" class="row mx-2"></div>
-        
-        <div class="photo-upload mt-4" id="upload-section">
-          <input type="file" id="photo-input" accept="image/*" class="form-control mb-2">
-          <button id="upload-button" class="btn btn-primary">Upload Photo</button>
-        </div>
-
+        <?php endif; ?>
+        <?php if ($isAuthenticated) : ?>
+          <button id="logout-button" class="btn btn-danger mx-3" onclick="logout()">
+            <i class="bi bi-box-arrow-in-left mx-2"></i> Logout
+          </button>
+          <div class="photo-upload mt-4" id="upload-section">
+            <form action="forms/photo.php" method="POST" enctype="multipart/form-data">
+              <input type="file" name="photo" accept="image/*" class="form-control mb-2">
+              <button type="submit" name="upload" class="btn btn-primary">Upload Photo</button>
+            </form>
+          </div>
+        <?php endif; ?>
+      </div>
+      <div id="photo-gallery" class="row mx-2">
+        <?php
+        // Fetch and display photos
+        $photos = glob('uploads/*.jpg'); // Assuming images are stored in 'uploads' directory
+        if (empty($photos)) {
+          echo '<p>No photos available.</p>';
+        } else {
+          foreach ($photos as $photoUrl) {
+            echo '<div class="col-4 mb-3 photo-container">';
+            echo '<img src="' . $photoUrl . '" class="img-thumbnail w-100">';
+            if ($isAuthenticated) {
+              echo '<form action="forms/photo.php" method="POST" style="position:absolute;top:10px;right:10px;">';
+              echo '<input type="hidden" name="url" value="' . $photoUrl . '">';
+              echo '<button type="submit" name="delete" class="delete-button">Delete</button>';
+              echo '</form>';
+            }
+            echo '</div>';
+          }
+        }
+        ?>
       </div>
     </section>
   </main>
 
   <script>
-    const fixedUsername = 'admin';
-    const fixedPassword = 'password';
-    const isAuthenticated = getCookie('authenticated');
-    const isOwner = getCookie('isOwner') === 'true';
-
-    function getCookie(name) {
-      let cookieArr = document.cookie.split(";");
-      for (let i = 0; i < cookieArr.length; i++) {
-        let cookiePair = cookieArr[i].split("=");
-        if (name === cookiePair[0].trim()) {
-          return decodeURIComponent(cookiePair[1]);
-        }
-      }
-      return null;
+    function login() {
+      window.location.href = "login.html";
     }
 
-    function setCookie(name, value, days) {
-      let date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      let expires = "expires=" + date.toUTCString();
-      document.cookie = name + "=" + value + ";" + expires + ";path=/;";
+    function logout() {
+      window.location.href = "forms/logout.php";
     }
-
-    function deleteCookie(name) {
-      document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    }
-
-    document.getElementById('login-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      if (username === fixedUsername && password === fixedPassword) {
-        setCookie('authenticated', 'true', 1);
-        setCookie('isOwner', 'true', 1);
-        showPhotoSection(true);
-      } else {
-        alert('Invalid credentials');
-      }
-    });
-
-    function showPhotoSection(isOwner = false) {
-      document.getElementById('photo-section').style.display = 'block';
-      if (isOwner) {
-        document.getElementById('login-button').classList.add('d-none');
-        document.getElementById('logout-button').classList.remove('d-none');
-        document.getElementById('upload-section').style.display = 'block';
-        document.getElementById('photo-section').classList.remove('d-none');
-        document.getElementById('login-section').classList.add('d-none');
-      }
-      loadPhotos(isOwner);
-    }
-
-    document.getElementById('logout-button').addEventListener('click', function () {
-      deleteCookie('authenticated');
-      deleteCookie('isOwner');
-      location.reload();
-    });
-
-    showPhotoSection(isOwner);
-
-    document.getElementById('upload-button').addEventListener('click', function () {
-      const input = document.getElementById('photo-input');
-      const file = input.files[0];
-      if (file) {
-        const formData = new FormData();
-        formData.append('photo', file);
-
-        fetch('photo.php', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            let isOwner = getCookie('isOwner') === 'true';
-            loadPhotos(isOwner);
-          } else {
-            alert('Photo upload failed.');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('An error occurred while uploading the photo.');
-        });
-      } else {
-        alert('Please select a photo to upload.');
-      }
-    });
-
-    function loadPhotos(isOwner) {
-      fetch('photo.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ action: 'list' })
-      })
-      .then(response => response.json())
-      .then(data => {
-        const photoGallery = document.getElementById('photo-gallery');
-        photoGallery.innerHTML = '';
-
-        if (!data.url || !Array.isArray(data.url) || data.url.length === 0) {
-          photoGallery.innerHTML = '<p>No photos available.</p>';
-          return;
-        }
-
-        data.url.forEach(photoUrl => {
-          const photoContainer = document.createElement('div');
-          photoContainer.classList.add('col-4', 'mb-3', 'photo-container');
-
-          const img = document.createElement('img');
-          img.src = photoUrl;
-          img.classList.add('img-thumbnail', 'w-100');
-
-          const deleteButton = document.createElement('button');
-          deleteButton.classList.add('delete-button');
-          deleteButton.textContent = 'Delete';
-
-          if (isOwner) {
-            deleteButton.style.display = 'inline';
-            deleteButton.addEventListener('click', function () {
-              fetch('photo.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ url: photoUrl, action: 'delete' })
-              })
-              .then(response => response.json())
-              .then(result => {
-                if (result.success) {
-                  loadPhotos(isOwner);
-                } else {
-                  alert('Failed to delete photo.');
-                }
-              })
-              .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while deleting the photo.');
-              });
-            });
-          }
-
-          photoContainer.appendChild(img);
-          photoContainer.appendChild(deleteButton);
-          photoGallery.appendChild(photoContainer);
-        });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while loading photos.');
-      });
-  }
-
-    function login(){
-      document.getElementById('photo-section').classList.add('d-none');
-      document.getElementById('login-section').classList.remove('d-none');
-    }
-
   </script>
 
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Aruna</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+<footer id="footer">
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Aruna</span></strong>. All Rights Reserved
     </div>
-  </footer>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </div>
+</footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
